@@ -1,0 +1,206 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Cars API",
+    "description": "An API for **Cars**",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:4000",
+      "description": "Main servers"
+    }
+  ],
+  "paths": {
+    "/api/cars": {
+      "summary": "Represents all cars in the database.",
+      "description": "This resource represents all **cars** in the database. Each **car** is identified by an alpha-numeric `VIN` number.\n",
+      "get": {
+        "tags": [
+          "Cars"
+        ],
+        "summary": "Gets all cars in the database.",
+        "description": "This operation returns all **cars** stored in the database.",
+        "responses": {
+          "200": {
+            "description": "A JSON object containing a **success** boolean flag and an array of **cars**.\n",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ArrayOfCars"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/api/cars/{vin}": {
+      "summary": "Represents a single **car** in the database.",
+      "description": "This resource represents unique **car** in the database. This **car** is identified by an alpha-numeric `VIN` number.\n",
+      "get": {
+        "tags": [
+          "Cars"
+        ],
+        "summary": "Gets a single car in the database.",
+        "description": "This operation returns a unique **car** in the database. The **car** is identified by an alpha-numeric `VIN` number.\n",
+        "parameters": {
+          "$ref": "#/components/parameters/VIN"
+        },
+        "responses": {
+          "200": {
+            "description": "A JSON object containing a **success** boolean flag and an object representing the car.\n",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Car"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The body of the request was invalid or was missing required fields.\n"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Cars"
+        ],
+        "summary": "Updates a single car in the database.",
+        "description": "This operation updates a single **car** in the database. The **car** is identified by an alpha-numeric `VIN` number.\n",
+        "parameters": {
+          "$ref": "#/components/parameters/VIN"
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "ArrayOfCars": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "description": "A boolean value signalling a successful operation.",
+            "example": true
+          },
+          "cars": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Car"
+            },
+            "description": "An array containing all **cars** in the database.",
+            "example": [
+              {
+                "VIN": "1C4PJLCS6FW531235",
+                "year": 2017,
+                "make": "Infiniti",
+                "model": "I30",
+                "mileage": 20000,
+                "transmissionType": "Automatic",
+                "titleStatus": null
+              },
+              {
+                "VIN": "1FMCU9G93EUD59171",
+                "year": 2016,
+                "make": "Ford",
+                "model": "Escape",
+                "mileage": 40000,
+                "transmissionType": "Automatic",
+                "titleStatus": "Reconstructed"
+              },
+              {
+                "VIN": "1VWCV7A39FC033325",
+                "year": 2014,
+                "make": "Volkswagen",
+                "model": "Passat",
+                "mileage": 88000,
+                "transmissionType": "Automatic",
+                "titleStatus": null
+              },
+              {
+                "VIN": "5FNRL38746B077742",
+                "year": 2007,
+                "make": "Honda",
+                "model": "Odyssey",
+                "mileage": 140000,
+                "transmissionType": "Manual",
+                "titleStatus": "Lemon"
+              },
+              {
+                "VIN": "2G2WP542351257328",
+                "year": 2015,
+                "make": "Pontiac",
+                "model": "Grand Prix",
+                "mileage": 90000,
+                "transmissionType": "Automatic",
+                "titleStatus": null
+              }
+            ]
+          }
+        }
+      },
+      "Car": {
+        "type": "object",
+        "properties": {
+          "VIN": {
+            "type": "string",
+            "example": "1C4PJLCS6FW531235"
+          },
+          "year": {
+            "type": "integer",
+            "example": 2017
+          },
+          "make": {
+            "type": "string",
+            "example": "Infiniti"
+          },
+          "model": {
+            "type": "string",
+            "example": "I30"
+          },
+          "mileage": {
+            "type": "integer",
+            "example": 20000
+          },
+          "transmissionType": {
+            "type": "string",
+            "nullable": true,
+            "example": "Automatic"
+          },
+          "titleStatus": {
+            "type": "string",
+            "nullable": true,
+            "example": null
+          }
+        },
+        "required": [
+          "VIN",
+          "year",
+          "make",
+          "model"
+        ]
+      }
+    },
+    "parameters": {
+      "VIN": [
+        {
+          "in": "path",
+          "name": "vin",
+          "schema": {
+            "type": "string"
+          },
+          "required": true,
+          "description": "A 17-digit alpha-numeric string representing the **car**'s `VIN`."
+        }
+      ]
+    }
+  }
+}

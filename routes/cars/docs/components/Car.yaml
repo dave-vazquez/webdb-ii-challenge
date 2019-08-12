@@ -1,0 +1,30 @@
+type: object
+properties:
+  VIN:
+    type: string
+    example: 1C4PJLCS6FW531235
+  year:
+    type: integer
+    example: 2017
+  make:
+    type: string
+    example: Infiniti
+  model:
+    type: string
+    example: I30
+  mileage:
+    type: integer
+    example: 20000
+  transmissionType:
+    type: string
+    nullable: true
+    example: Automatic
+  titleStatus:
+    type: string
+    nullable: true
+    example:
+required:
+  - VIN
+  - year
+  - make
+  - model

@@ -1,0 +1,19 @@
+openapi: 3.0.0
+info:
+  title: Cars API
+  description: An API for **Cars**
+  version: 1.0.0
+servers:
+  - url: http://localhost:4000
+    description: Main servers
+paths:
+  $ref: ./routes/docs/paths/cars-paths.yaml
+components:
+  schemas:
+    ArrayOfCars:
+      $ref: ./routes/docs/components/ArrayOfCars.yaml
+    Car:
+      $ref: ./routes/docs/components/Car.yaml
+  parameters:
+    VIN:
+      $ref: ./routes/docs/parameters/Vin.yaml
