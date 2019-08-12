@@ -4,7 +4,7 @@ const cors = require('cors');
 const morgan = require('morgan');
 const swaggerUI = require('swagger-ui-express');
 const carsRouter = require('./routes/cars/carsRouter.js');
-const swaggerDoc = require('./swaggerDoc.json');
+const swaggerDoc = require('./docs/swaggerDoc.json');
 
 const server = express();
 
