@@ -1,0 +1,60 @@
+/api/cars:
+  summary: Represents all cars in the database.
+  description: >
+    This resource represents all **cars** in the database.
+    Each **car** is identified by an alpha-numeric `VIN` number.
+  get:
+    tags:
+      - Cars
+    summary: Gets all cars in the database.
+    description: This operation returns all **cars** stored in the database.
+    responses:
+      '200':
+        description: >
+          A JSON object containing a **success** boolean flag
+          and an array of **cars**.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ArrayOfCars'
+      '500':
+        description: Internal Server Error
+  
+/api/cars/{vin}:
+  summary: Represents a single **car** in the database.
+  description: >
+    This resource represents unique **car** in the database.
+    This **car** is identified by an alpha-numeric `VIN` number.
+  get:
+    tags:
+      - Cars
+    summary: Gets a single car in the database.
+    description: >
+      This operation returns a unique **car** in the database.
+      The **car** is identified by an alpha-numeric `VIN` number.
+    parameters:
+      $ref: '#/components/parameters/VIN'
+    responses:
+      '200':
+        description: >
+          A JSON object containing a **success** boolean flag
+          and an object representing the car.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Car'
+      '400':
+        description: >
+          The body of the request was invalid or was missing required fields.
+      '500':
+        description: Internal Server Error
+  post:
+    tags:
+      - Cars
+    summary: Updates a single car in the database.
+    description: >
+      This operation updates a single **car** in the database.
+      The **car** is identified by an alpha-numeric `VIN` number.
+    parameters:
+      $ref: '#/components/parameters/VIN'
+          

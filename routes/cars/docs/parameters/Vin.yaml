@@ -1,0 +1,6 @@
+- in: path
+  name: vin
+  schema:
+    type: string
+  required: true
+  description: A 17-digit alpha-numeric string representing the **car**'s `VIN`.
